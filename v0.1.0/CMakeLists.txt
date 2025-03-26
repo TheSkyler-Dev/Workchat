@@ -14,9 +14,6 @@ endif()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-include_directories(${PROJECT_SOURCE_DIR}/include)
-
-# FetchContent module to download dependencies
 include(FetchContent)
 
 # Fetch nlohmann/json
@@ -53,5 +50,4 @@ endif()
 install(TARGETS Workchat DESTINATION bin)
 
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
-message(STATUS "Compiler: ${CMAKE_CXX_COMPILER_ID}")
-message(STATUS "Include directories: ${PROJECT_SOURCE_DIR}/include")
+message(STATUS "Include directories: ${CMAKE_INCLUDE_DIRECTORIES_PROJECT_BEFORE}")

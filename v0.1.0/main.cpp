@@ -1,9 +1,11 @@
-#pragma once
 #include <iostream>
 #include <string>
 #include <vector>
 #include <locale.h>
-#include <nlohman/json.hpp>
+#include <conio.h>
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
 
 //ConsoleClear class
 class ConsoleClear {
@@ -104,20 +106,48 @@ class Menu {
 class Chat {
     public:
         Chat() = default;
-
+    
         void addMessage(const std::string& message) {
             messages.push_back(message);
         }
-
+    
         void printChat() const {
+            ConsoleClear::clear();
+            std::cout << Colors::fgYellow << "Chat History:" << Colors::fgReset << std::endl;
             for (const auto& message : messages) {
-                std::cout << message << std::endl;
+                std::cout << Colors::fgCyan << "You: " << Colors::fgReset << message << std::endl;
             }
+            std::cout << Colors::fgYellow << "Type your message below (Press ESC to exit):" << Colors::fgReset << std::endl;
         }
-
+    
     private:
         std::vector<std::string> messages;
-};
+    };
+    
+    void startChat(Chat& chat) {
+        std::string message;
+    
+        while (true) {
+            chat.printChat();
+    
+            // Check if the Escape key is pressed
+            if (_kbhit()) { // Windows-specific; use termios for Linux
+                char key = _getch();
+                if (key == 27) { // ASCII code for Escape key
+                    std::cout << Colors::fgRed << "Exiting chat..." << Colors::fgReset << std::endl;
+                    break;
+                }
+            }
+    
+            // Get user input
+            std::cout << Colors::fgGreen << "You: " << Colors::fgReset;
+            std::getline(std::cin, message);
+    
+            if (!message.empty()) {
+                chat.addMessage(message);
+            }
+        }
+    };
 
 int main(){
     setlocale(LC_ALL, "");
@@ -149,29 +179,25 @@ int main(){
 
             //start chat
             case 1:
-                ConsoleClear::clear();
-
                 std::cout << "Starting chat..." << std::endl;
+                startChat(chat);
                 break;
 
             //view chat history
             case 2:
-                ConsoleClear::clear();
-
                 std::cout << "Viewing chat history..." << std::endl;
+                chat.printChat();
                 break;
 
             //settings
             case 3:
                 ConsoleClear::clear();
-
                 std::cout << "Opening settings..." << std::endl;
                 break;
             
             //exit
             case 4:
                 ConsoleClear::clear();
-
                 std::cout << "Exiting..." << std::endl;
                 return 0;
 
