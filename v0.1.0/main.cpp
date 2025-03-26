@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <locale.h>
-#include <json.hpp>
+#include <nlohman/json.hpp>
 
 //ConsoleClear class
 class ConsoleClear {
