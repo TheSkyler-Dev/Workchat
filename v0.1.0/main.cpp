@@ -180,7 +180,7 @@ int main(){
             //start chat
             case 1:
                 std::cout << "Starting chat..." << std::endl;
-                chat.startChat(chat);
+                startChat(chat);
                 break;
 
             //view chat history
