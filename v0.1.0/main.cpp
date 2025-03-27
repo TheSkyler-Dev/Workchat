@@ -3,9 +3,6 @@
 #include <vector>
 #include <locale.h>
 #include <conio.h>
-#ifdef _WIN32
-#include <windows.h>
-#endif
 #include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
@@ -88,17 +85,17 @@ class Menu {
         }
 
         void printHeader(const std::string& header) const {
-            std::cout << Colors::fgCyan << "┌───────────────────────────┐" << Colors::fgReset << std::endl;
-            std::cout << Colors::fgCyan << "│ " << Colors::fgYellow << header << Colors::fgCyan << " │" << Colors::fgReset << std::endl;
-            std::cout << Colors::fgCyan << "├───────────────────────────┤" << Colors::fgReset << std::endl;
+            std::cout << Colors::fgCyan << "|---------------------------|" << Colors::fgReset << std::endl;
+            std::cout << Colors::fgCyan << "| " << Colors::fgYellow << header << Colors::fgCyan << " |" << Colors::fgReset << std::endl;
+            std::cout << Colors::fgCyan << "|---------------------------|" << Colors::fgReset << std::endl;
         }
 
         void printOption(int index, const std::string& option) const {
-            std::cout << Colors::fgCyan << "│ " << Colors::fgGreen << index << ". " << option << Colors::fgCyan << " │" << Colors::fgReset << std::endl;
+            std::cout << Colors::fgCyan << "| " << Colors::fgGreen << index << ". " << option << Colors::fgCyan << " |" << Colors::fgReset << std::endl;
         }
 
         void printFooter() const {
-            std::cout << Colors::fgCyan << "└───────────────────────────┘" << Colors::fgReset << std::endl;
+            std::cout << Colors::fgCyan << "|___________________________|" << Colors::fgReset << std::endl;
         }
 
     private:
@@ -149,6 +146,7 @@ class Chat {
                     if (!message.empty()) {
                         chat.addMessage(message);
                     }
+                    
                 } else {
                     // Handle input failure (e.g., Ctrl+D or EOF)
                     std::cin.clear(); // Clear the error flag
@@ -160,10 +158,6 @@ class Chat {
 
 int main(){
     setlocale(LC_ALL, "");
-
-    #ifdef _WIN32
-    SetConsoleOutputCP(CP_UTF8); // Set console output to UTF-8
-    #endif
 
     Menu menu;
 
