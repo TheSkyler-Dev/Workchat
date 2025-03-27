@@ -3,6 +3,9 @@
 #include <vector>
 #include <locale.h>
 #include <conio.h>
+#ifdef _WIN32
+#include <windows.h>
+#endif
 #include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
@@ -139,18 +142,28 @@ class Chat {
                 }
             }
     
-            // Get user input
-            std::cout << Colors::fgGreen << "You: " << Colors::fgReset;
-            std::getline(std::cin, message);
-    
-            if (!message.empty()) {
-                chat.addMessage(message);
+            // Check if there is input available in std::cin
+            if (std::cin.peek() != EOF) {
+                std::cout << Colors::fgGreen << "You: " << Colors::fgReset;
+                if (std::getline(std::cin, message)) {
+                    if (!message.empty()) {
+                        chat.addMessage(message);
+                    }
+                } else {
+                    // Handle input failure (e.g., Ctrl+D or EOF)
+                    std::cin.clear(); // Clear the error flag
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
+                }
             }
         }
     };
 
 int main(){
     setlocale(LC_ALL, "");
+
+    #ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8); // Set console output to UTF-8
+    #endif
 
     Menu menu;
 
