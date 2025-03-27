@@ -1,8 +1,8 @@
+//SOME POINTLESS CHAT PROGRAM THAT IS A WASTE OF TIME
 #include <iostream>
 #include <string>
 #include <vector>
 #include <locale.h>
-#include <conio.h>
 #include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
@@ -117,7 +117,7 @@ class Chat {
             for (const auto& message : messages) {
                 std::cout << Colors::fgCyan << "You: " << Colors::fgReset << message << std::endl;
             }
-            std::cout << Colors::fgYellow << "Type your message below (Press ESC to exit):" << Colors::fgReset << std::endl;
+            std::cout << Colors::fgYellow << "Type your message below (Type /quit to exit):" << Colors::fgReset << std::endl;
         }
     
     private:
@@ -129,15 +129,7 @@ class Chat {
     
         while (true) {
             chat.printChat();
-    
-            // Check if the Escape key is pressed
-            if (_kbhit()) { // Windows-specific; use termios for Linux
-                char key = _getch();
-                if (key == 27) { // ASCII code for Escape key
-                    std::cout << Colors::fgRed << "Exiting chat..." << Colors::fgReset << std::endl;
-                    break;
-                }
-            }
+
     
             // Check if there is input available in std::cin
             if (std::cin.peek() != EOF) {
@@ -146,7 +138,10 @@ class Chat {
                     if (!message.empty()) {
                         chat.addMessage(message);
                     }
-                    
+                    else if (message == "/quit") {
+                        std::cout << Colors::fgRed << "Exiting chat..." << Colors::fgReset << std::endl;
+                        break;
+                    }
                 } else {
                     // Handle input failure (e.g., Ctrl+D or EOF)
                     std::cin.clear(); // Clear the error flag
@@ -216,4 +211,4 @@ int main(){
         }
     }
     return 0;
-}
+} //WTF IS THE POINT!?
