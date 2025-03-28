@@ -1,4 +1,3 @@
-//SOME POINTLESS CHAT PROGRAM THAT IS A WASTE OF TIME
 #include <iostream>
 #include <string>
 #include <vector>
@@ -135,7 +134,7 @@ class Chat {
             if (std::cin.peek() != EOF) {
                 std::cout << Colors::fgGreen << "You: " << Colors::fgReset;
                 if (std::getline(std::cin, message)) {
-                    if (!message.empty()) {
+                    if (!message.empty() || message != "/quit") {
                         chat.addMessage(message);
                     }
                     else if (message == "/quit") {
@@ -211,4 +210,4 @@ int main(){
         }
     }
     return 0;
-} //WTF IS THE POINT!?
+}
