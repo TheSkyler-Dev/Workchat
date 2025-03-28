@@ -85,12 +85,12 @@ class Menu {
 
         void printHeader(const std::string& header) const {
             std::cout << Colors::fgCyan << "|---------------------------|" << Colors::fgReset << std::endl;
-            std::cout << Colors::fgCyan << "| " << Colors::fgYellow << header << Colors::fgCyan << " |" << Colors::fgReset << std::endl;
+            std::cout << Colors::fgCyan << "| " << Colors::fgYellow << header << Colors::fgCyan << std::string(16, ' ') << " |" << Colors::fgReset << std::endl;
             std::cout << Colors::fgCyan << "|---------------------------|" << Colors::fgReset << std::endl;
         }
 
         void printOption(int index, const std::string& option) const {
-            std::cout << Colors::fgCyan << "| " << Colors::fgGreen << index << ". " << option << Colors::fgCyan << " |" << Colors::fgReset << std::endl;
+            std::cout << Colors::fgCyan << "| " << Colors::fgGreen << index << ". " << option << Colors::fgCyan << std::string(22 - (option.length()), ' ') << " |" << Colors::fgReset << std::endl;
         }
 
         void printFooter() const {
@@ -134,10 +134,11 @@ class Chat {
             if (std::cin.peek() != EOF) {
                 std::cout << Colors::fgGreen << "You: " << Colors::fgReset;
                 if (std::getline(std::cin, message)) {
-                    if (!message.empty() || message != "/quit") {
+                    if (!message.empty() && message != "/quit") {
                         chat.addMessage(message);
                     }
                     else if (message == "/quit") {
+                        ConsoleClear::clear();
                         std::cout << Colors::fgRed << "Exiting chat..." << Colors::fgReset << std::endl;
                         break;
                     }
