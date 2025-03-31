@@ -155,7 +155,6 @@ int main(){
 
     menu.addOption("Start Chat");
     menu.addOption("View Chat History");
-    menu.addOption("Settings");
     menu.addOption("Exit");
 
     Chat chat;
@@ -188,14 +187,8 @@ int main(){
                 chat.printChat();
                 break;
 
-            //settings
-            case 3:
-                ConsoleClear::clear();
-                std::cout << "Opening settings..." << std::endl;
-                break;
-            
             //exit
-            case 4:
+            case 3:
                 ConsoleClear::clear();
                 std::cout << "Exiting..." << std::endl;
                 return 0;
