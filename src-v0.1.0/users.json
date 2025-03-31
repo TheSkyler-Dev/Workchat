@@ -1,0 +1,19 @@
+{
+    "defaultuser": {
+        "id": "default",
+        "Username": "DefaultUser",
+        "Password": ""
+    },
+
+    "user1": {
+        "id": "1",
+        "Username": "",
+        "Password": ""
+    },
+
+    "user2": {
+        "id": "2",
+        "Username": "",
+        "Password": ""
+    }
+}
