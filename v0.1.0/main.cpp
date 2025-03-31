@@ -2,9 +2,6 @@
 #include <string>
 #include <vector>
 #include <locale.h>
-#include <nlohmann/json.hpp>
-
-using json = nlohmann::json;
 
 //ConsoleClear class
 class ConsoleClear {
