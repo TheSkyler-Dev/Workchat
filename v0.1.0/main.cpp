@@ -121,35 +121,35 @@ class Chat {
     
     private:
         std::vector<std::string> messages;
-    };
+};
+
+void startChat(Chat& chat) {
+    std::string message;
     
-    void startChat(Chat& chat) {
-        std::string message;
-    
-        while (true) {
-            chat.printChat();
+    while (true) {
+        chat.printChat();
 
     
-            // Check if there is input available in std::cin
-            if (std::cin.peek() != EOF) {
-                std::cout << Colors::fgGreen << "You: " << Colors::fgReset;
-                if (std::getline(std::cin, message)) {
-                    if (!message.empty() && message != "/quit") {
-                        chat.addMessage(message);
-                    }
-                    else if (message == "/quit") {
-                        ConsoleClear::clear();
-                        std::cout << Colors::fgRed << "Exiting chat..." << Colors::fgReset << std::endl;
-                        break;
-                    }
-                } else {
-                    // Handle input failure (e.g., Ctrl+D or EOF)
-                    std::cin.clear(); // Clear the error flag
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
+        // Check if there is input available in std::cin
+        if (std::cin.peek() != EOF) {
+            std::cout << Colors::fgGreen << "You: " << Colors::fgReset;
+            if (std::getline(std::cin, message)) {
+                if (!message.empty() && message != "/quit") {
+                    chat.addMessage(message);
                 }
+                else if (message == "/quit") {
+                    ConsoleClear::clear();
+                    std::cout << Colors::fgRed << "Exiting chat..." << Colors::fgReset << std::endl;
+                    break;
+                }
+            } else {
+                // Handle input failure (e.g., Ctrl+D or EOF)
+                std::cin.clear(); // Clear the error flag
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
             }
         }
-    };
+    }
+};
 
 int main(){
     setlocale(LC_ALL, "");
